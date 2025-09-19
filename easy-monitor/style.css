@@ -1,0 +1,55 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background: #f9fbfd;
+  color: #172b4d;
+}
+
+header {
+  background: #0052cc;
+  color: white;
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header nav a {
+  color: white;
+  margin-left: 15px;
+  text-decoration: none;
+}
+
+.hero {
+  text-align: center;
+  padding: 50px 20px;
+  background: white;
+}
+
+.hero button {
+  padding: 10px 20px;
+  background: #36b37e;
+  border: none;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.features, .pricing {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.pricing {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.plan {
+  background: white;
+  border: 1px solid #c1c7d0;
+  padding: 20px;
+  width: 200px;
+  border-radius: 8px;
+}
