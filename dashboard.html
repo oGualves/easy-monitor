@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard - Easy Monitor</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Dashboard de Monitoramento</h1>
+    <a href="index.html" class="btn">Voltar</a>
+  </header>
+
+  <main>
+    <section class="status">
+      <h2>Status do Sistema</h2>
+      <ul>
+        <li>Servidor 1: ✅ Online</li>
+        <li>Servidor 2: ⚠️ Instável</li>
+        <li>Servidor 3: ❌ Offline</li>
+      </ul>
+    </section>
+
+    <section class="graficos">
+      <canvas id="cpuChart"></canvas>
+      <canvas id="memChart"></canvas>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
