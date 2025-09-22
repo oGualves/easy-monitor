@@ -2,32 +2,76 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Dashboard - Easy Monitor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - EasyMonitor</title>
   <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    .dashboard {
+      padding: 30px;
+      text-align: center;
+    }
+
+    .dashboard h2 {
+      margin-bottom: 20px;
+      color: #0052cc;
+    }
+
+    .charts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .chart-card {
+      background: white;
+      border: 1px solid #c1c7d0;
+      border-radius: 8px;
+      padding: 15px;
+    }
+
+    canvas {
+      max-width: 100%;
+      height: 200px !important; /* deixa todos menores */
+    }
+  </style>
 </head>
 <body>
+  <!-- Header -->
   <header>
-    <h1>Dashboard de Monitoramento</h1>
-    <a href="index.html" class="btn">Voltar</a>
+    <h1>EasyMonitor Cloud</h1>
+    <nav>
+      <a href="index.html">Início</a>
+      <a href="#">Sair</a>
+    </nav>
   </header>
 
-  <main>
-    <section class="status">
-      <h2>Status do Sistema</h2>
-      <ul>
-        <li>Servidor 1: ✅ Online</li>
-        <li>Servidor 2: ⚠️ Instável</li>
-        <li>Servidor 3: ❌ Offline</li>
-      </ul>
-    </section>
+  <!-- Dashboard -->
+  <section class="dashboard">
+    <h2>Visão Geral dos Recursos</h2>
+    <div class="charts">
+      <div class="chart-card">
+        <h4>Uso de CPU</h4>
+        <canvas id="cpuChart"></canvas>
+      </div>
+      <div class="chart-card">
+        <h4>Uso de Memória</h4>
+        <canvas id="memoryChart"></canvas>
+      </div>
+      <div class="chart-card">
+        <h4>Uso de Disco</h4>
+        <canvas id="diskChart"></canvas>
+      </div>
+    </div>
+  </section>
 
-    <section class="graficos">
-      <canvas id="cpuChart"></canvas>
-      <canvas id="memChart"></canvas>
-    </section>
-  </main>
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 EasyMonitor Cloud - Todos os direitos reservados</p>
+  </footer>
 
-  <script src="script.js"></script>
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="dashboard.js"></script>
 </body>
 </html>
