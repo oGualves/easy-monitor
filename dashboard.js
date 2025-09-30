@@ -1,39 +1,76 @@
-// CPU Usage
-new Chart(document.getElementById("cpuChart"), {
-  type: "line",
-  data: {
-    labels: ["10s", "20s", "30s", "40s", "50s"],
-    datasets: [{
-      label: "Uso de CPU (%)",
-      data: [20, 35, 30, 50, 40],
-      borderColor: "#0052cc",
-      fill: false,
-      tension: 0.3
-    }]
-  }
-});
+// =============================
+// Dashboard.js - EasyMonitor
+// =============================
 
-// Memory Usage
-new Chart(document.getElementById("memoryChart"), {
-  type: "doughnut",
-  data: {
-    labels: ["Usada", "Disponível"],
-    datasets: [{
-      data: [65, 35],
-      backgroundColor: ["#36b37e", "#c1c7d0"]
-    }]
-  }
-});
+// --- Função genérica para criar gráficos ---
+function criarGrafico(ctx, label, cor, maxY = 100) {
+  return new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: Array.from({ length: 10 }, (_, i) => i),
+      datasets: [{
+        label: label,
+        data: Array(10).fill(0),
+        borderColor: cor,
+        borderWidth: 2,
+        fill: false,
+        tension: 0.3
+      }]
+    },
+    options: {
+      responsive: true,
+      animation: false,
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: maxY
+        }
+      }
+    }
+  });
+}
 
-// Disk Usage
-new Chart(document.getElementById("diskChart"), {
-  type: "bar",
-  data: {
-    labels: ["C:", "D:", "E:"],
-    datasets: [{
-      label: "Uso em GB",
-      data: [120, 80, 45],
-      backgroundColor: ["#0052cc", "#36b37e", "#ff5630"]
-    }]
+// --- Inicialização dos gráficos ---
+const cpuChart = criarGrafico(
+  document.getElementById("cpuChart").getContext("2d"),
+  "Uso de CPU (%)",
+  "#36b37e"
+);
+
+const ramChart = criarGrafico(
+  document.getElementById("ramChart").getContext("2d"),
+  "Uso de RAM (%)",
+  "#0052cc"
+);
+
+const netChart = criarGrafico(
+  document.getElementById("netChart").getContext("2d"),
+  "Tráfego de Rede (Mbps)",
+  "#ff5630",
+  1000 // rede pode ter valores mais altos
+);
+
+// --- Função que gera valores aleatórios ---
+function gerarValor(max = 100) {
+  return Math.floor(Math.random() * max);
+}
+
+// --- Atualização automática a cada 2s ---
+setInterval(() => {
+  atualizarGrafico(cpuChart, gerarValor(100));
+  atualizarGrafico(ramChart, gerarValor(100));
+  atualizarGrafico(netChart, gerarValor(1000));
+}, 2000);
+
+// --- Atualiza dados mantendo só os últimos 10 ---
+function atualizarGrafico(chart, novoValor) {
+  chart.data.labels.push(chart.data.labels.length);
+  chart.data.datasets[0].data.push(novoValor);
+
+  if (chart.data.datasets[0].data.length > 10) {
+    chart.data.labels.shift();
+    chart.data.datasets[0].data.shift();
   }
-});
+
+  chart.update();
+}
